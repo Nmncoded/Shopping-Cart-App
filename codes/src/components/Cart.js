@@ -13,20 +13,20 @@ class Cart extends React.Component {
             }
         })
     }
-    
+
     render(){
         let cartProducts = this.props.addToCartBtnProducts;
         // console.log(cartProducts);
         return <>
             <section className='main-cart'>
                 <div onClick={this.handleShowCart} className='bag-btn'>
-                    <img src="/static/bag-icon.png" alt='bag-icon' />
-                    <span className='num'>{cartProducts.length}</span>
+                    {this.state.displayBag ? <h6 className='cross'>X</h6> :<img src="/static/bag-icon.png" alt='bag-icon' />}
+                    <span className='num'>{cartProducts.reduce((acc,p) => {return acc = acc + p.quantity},0)}</span>
                 </div>
                 <div className={this.state.displayBag ? "cart activ-cart" : "cart"} >
                     <header className='cart-header'>
                     <img src="/static/bag-icon.png" alt='bag-icon' />
-                    <span className='num-1'>{cartProducts.length}</span>
+                    <span className='num-1'>{cartProducts.reduce((acc,p) => {return acc = acc + p.quantity},0)}</span>
                     <span>Cart</span>
                     </header>
                     <ul className='clicked-items'>
@@ -46,8 +46,8 @@ class Cart extends React.Component {
                             <div className='price-per-item'>
                                 <span>${p.price}</span>
                                 <div className='plus-minus-btns'>
-                                    <button onClick={() => this.props.handleQty(p.id,"plus")} >+</button>
-                                    <button onClick={() => this.props.handleQty(p.id,"minus")} >-</button>
+                                    <button onClick={() => this.props.handleQty(p.id,"plus",p)} >+</button>
+                                    <button onClick={() => this.props.handleQty(p.id,"minus",p)} >-</button>
                                 </div>
                             </div>
                         </li>
@@ -58,9 +58,9 @@ class Cart extends React.Component {
                     </ul>
                     <div className='subtotal'>
                         <span>Subtotal</span>
-                        <span>$ 199.00</span>
+                        <span>{this.props.totalAm}</span>
                     </div>
-                    <button className='checkout-btn'>CHECKOUT</button>
+                    <button onClick={() => alert(`total amount is ${this.props.totalAm}`)} className='checkout-btn'>CHECKOUT</button>
                 </div>
             </section>
         </>

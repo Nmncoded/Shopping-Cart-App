@@ -19,7 +19,7 @@ class Cart extends React.Component {
         // console.log(cartProducts);
         return <>
             <section className='main-cart'>
-                <div onClick={this.handleShowCart} className='bag-btn'>
+                <div onClick={this.handleShowCart} className='bag-btn' >
                     {this.state.displayBag ? <h6 className='cross'>X</h6> :<img src="/static/bag-icon.png" alt='bag-icon' />}
                     <span className='num'>{cartProducts.reduce((acc,p) => {return acc = acc + p.quantity},0)}</span>
                 </div>

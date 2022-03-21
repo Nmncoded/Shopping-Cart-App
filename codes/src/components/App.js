@@ -13,6 +13,19 @@ class App extends React.Component {
             totalAm:0,
         };
     }
+    componentDidMount(){
+        if(localStorage.carts){
+            this.setState({addToCartBtnProducts:JSON.parse(localStorage.carts)})
+        }
+        window.addEventListener("beforeunload",this.handleLocalStorage)
+    }
+    componentWillUnmount(){
+        window.removeEventListener("beforeunload",this.handleLocalStorage)
+    }
+    handleLocalStorage = () => {
+        localStorage.setItem("carts",JSON.stringify(this.state.addToCartBtnProducts))
+        
+    }
     handleAddToCartBtn = (sortedProducts,id) => {
         
         if(this.state.addToCartBtnProducts.every(p => p.id !== id)){

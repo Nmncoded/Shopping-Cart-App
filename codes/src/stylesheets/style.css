@@ -147,6 +147,11 @@ body {
 	flex-direction: column;
 	justify-content: space-between;
 }
+@media screen and (max-width:767px){
+	.product-ui li {
+		width: 80%;
+	}
+}
 .product-ui li div {
 	width: 100%;
 	display: flex;
@@ -219,6 +224,9 @@ body {
 	align-items: center;
 	background-color: rgba(0, 0, 0,0.8);
 }
+
+
+
 .bag-btn img {
 	width: 36px;
 	object-fit: cover;
